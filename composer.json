@@ -1,0 +1,23 @@
+{
+    "name": "acetrot/msg91",
+    "description": "Wrapper for MSG91 API",
+    "type": "library",
+    "require": {
+        "phpunit/phpunit": "9.5.x-dev",
+        "phpspec/phpspec": "8.0.x-dev",
+        "illuminate/support": "9.x-dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Messenger\\": "src/"
+        }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Aadil agwan",
+            "email": "agwan96@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}

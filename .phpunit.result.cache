@@ -1,0 +1,1 @@
+{"version":1,"defects":{"Messenger\\tests\\Unit\\SendSmsTest::test_can_echo_msg":4},"times":{"Messenger\\tests\\Unit\\SendSmsTest::test_can_echo_msg":0.029}}

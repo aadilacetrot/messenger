@@ -53,8 +53,7 @@ class Wrapper
 
     private static function setup($action, $param)
     {
-
-        $param = self::setOptions($param);
+        self::changeDefault($param);
 
         // $sms = ["sendotp" => "otp?", "resendotp" => "otp/resend?", "verify" => "otp/verify?", "sms" => "sendhttp.php"];
 
@@ -94,7 +93,7 @@ class Wrapper
      * @param array $params
      * @return void
      */
-    private static function setOptions(array $params): void
+    private static function changeDefault(array $params): void
     {
         foreach ($params as $key => $value) {
             static::${$key} = $value;

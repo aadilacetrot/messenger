@@ -11,7 +11,7 @@ class WrapperServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/config/msg91.php' => config_path('msg91.php'),
+            __DIR__ . '/../config/msg91.php' => config_path('msg91.php'),
         ]);
     }
 

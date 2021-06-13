@@ -12,7 +12,7 @@ class WrapperServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__ . '/../config/msg91.php' => config_path('msg91.php'),
-        ]);
+        ], 'messenger-config');
     }
 
     public function register()

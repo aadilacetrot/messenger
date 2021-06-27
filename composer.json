@@ -1,15 +1,22 @@
 {
     "name": "acetrot/msg91",
     "description": "Wrapper for MSG91 API",
+	"keywords": ["msg91", "messaging", "sms"],
     "type": "library",
     "require": {
-        "phpunit/phpunit": "9.5.x-dev",
-        "phpspec/phpspec": "8.0.x-dev",
-        "illuminate/support": "9.x-dev"
+        "phpunit/phpunit": "^9.5.6",
+        "phpspec/phpspec": "^7.1.0",
+        "illuminate/support": "9.x-dev",
+        "guzzlehttp/guzzle": "7.4.x-dev"
     },
     "autoload": {
         "psr-4": {
             "Messenger\\": "src/"
+        }
+    },
+	"autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
         }
     },
     "license": "MIT",

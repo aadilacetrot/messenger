@@ -19,15 +19,18 @@ return [
     /* Country option, 0 for international, 91 for India, 1 for US (optional) */
     'country' => env('MSG91_COUNTRY', 91),
 
-    'map' => [
-        \App\Lib\SMSCode::EXPIRY_REMINDER => 'sms.expiry_reminder',
-        \App\Lib\SMSCode::EXPIRED => 'sms.expired',
-        \App\Lib\SMSCode::AUTO_RENEW_REMINDER => 'sms.auto_renew_reminder',
-        \App\Lib\SMSCode::RENEWED => 'sms.renewed',
-        \App\Lib\SMSCode::ACTIVATED => 'sms.activated',
-        \App\Lib\SMSCode::FAILED => 'sms.failed',
-        \App\Lib\SMSCode::SEND_OTP => 'sms.send_otp',
-    ],
+    /* Otp expiry in minutes */
+    'otp_expiry' => 5,
+
+    // 'map' => [
+    //     \App\Lib\SMSCode::EXPIRY_REMINDER => 'sms.expiry_reminder',
+    //     \App\Lib\SMSCode::EXPIRED => 'sms.expired',
+    //     \App\Lib\SMSCode::AUTO_RENEW_REMINDER => 'sms.auto_renew_reminder',
+    //     \App\Lib\SMSCode::RENEWED => 'sms.renewed',
+    //     \App\Lib\SMSCode::ACTIVATED => 'sms.activated',
+    //     \App\Lib\SMSCode::FAILED => 'sms.failed',
+    //     \App\Lib\SMSCode::SEND_OTP => 'sms.send_otp',
+    // ],
 
     'status_code' => [
         505 => "Demo account",

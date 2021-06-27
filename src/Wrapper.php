@@ -2,6 +2,8 @@
 
 namespace Messenger;
 
+use Illuminate\Support\Facades\Http;
+
 class Wrapper
 {
     /**
@@ -40,6 +42,12 @@ class Wrapper
      */
     protected $api = ["sendotp" => "otp?", "resendotp" => "otp/resend?", "verify" => "otp/verify?", "sms" => "sendhttp.php"];
 
+    /**
+     * Default param values
+     * @var array $defaults
+     */
+    protected $defaults = ['authkey', 'sender', 'country', 'route'];
+
 
     public function __construct()
     {
@@ -51,40 +59,39 @@ class Wrapper
     }
 
 
-    private static function setup($action, $param)
+    public static function sendOTP($param)
     {
-        self::changeDefault($param);
+        return (new self)->setup('sendotp', $param);
+    }
 
-        // $sms = ["sendotp" => "otp?", "resendotp" => "otp/resend?", "verify" => "otp/verify?", "sms" => "sendhttp.php"];
+    public static function resendOTP($param)
+    {
+        $param['otp_expiry'] = $param['otp_expiry'] ?? config('msg91.otp_expiry');
+        return (new self)->setup('resendotp', $param);
+    }
 
-        if (!array_key_exists($action, static::$api)) {
-            return (["success" => false, "message" => "invalid request"]);
-        }
+    public static function verifyOTP($param)
+    {
+        $param['otp_expiry'] = $param['otp_expiry'] ?? config('msg91.otp_expiry');
+        return (new self)->setup('verify', $param);
+    }
+    public static function sms($param)
+    {
+        $url = 'https://api.msg91.com/api/';
+        $param['url'] = $param['url'] ?? $url;
+        return (new self)->setup('sms', $param);
+    }
 
-        $url = static::$baseUrl . static::$api[$action];
 
-        // try {
-        //     $client = new Client(); //GuzzleHttp\Client
-        //     $response = $client->post($url, [
-        //         'form_params' => $param
-        //     ]);
-        // } catch (\Throwable $th) {
-        //     return (["success" => false, "message" => $th->getMessage()]);
-        // }
-        // if ($response->getStatusCode() == 200) {
+    private function setup($action, $params)
+    {
+        $params = $this->overrideDefaults( $params );
 
-        //     $data = json_decode($response->getBody());
-        //     // return $data;
-        //     if ($data) {
-        //         return static::checkResponse($data);
-        //     } else {
-        //         return (["success" => true, "message" => 'success']);
-        //     }
-        // } else {
-        //     return (["success" => false, "message" => $response->message]);
+        if (!array_key_exists($action, $this->api)) { return (["success" => false, "message" => "invalid request"]); }
 
-        //     // return ['type' => "error", "message" => "fail to send!"];
-        // }
+        $url = $this->baseUrl . $this->api[$action];
+
+        return Http::post($url, $params)->json();
     }
 
     /**
@@ -93,15 +100,27 @@ class Wrapper
      * @param array $params
      * @return void
      */
-    private static function changeDefault(array $params): void
+    private function overrideDefaults(array $params): array
     {
-        foreach ($params as $key => $value) {
-            static::${$key} = $value;
+        if ( array_key_exists('baseUrl', $params) ) {
+            $this->baseUrl = $params['baseUrl'];
+            unset($params['baseUrl']);
         }
-    }
 
-    public function echoMsg(string $name = ''): string
-    {
-        return 'Hi, ' . ucfirst($name);
+        foreach ( $params as $key =>  $param ) {
+            if ( in_array($key, $this->defaults )) {
+                $this->{$key} = $param;
+                unset($params[$key]);
+            }
+        }
+
+        $defaults = [
+            'authkey' => $this->authkey,
+            'sender' => $this->sender,
+            'country' => $this->country,
+            'route' => $this->route,
+        ];
+
+        return $defaults + $params;
     }
 }

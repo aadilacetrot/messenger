@@ -11,7 +11,7 @@ return [
     'sender_id' => env('MSG91_SENDER_ID', ''),
 
     /* Default sender email (required) */
-    'sender_email' => env('MSG91_SENDER_EMAIL', 'hi@riskwala.com'),
+    'sender_email' => env('MSG91_SENDER_EMAIL', ''),
 
     /* Default route, 1 for promotional, 4 for transactional id (required) */
     'route' => env('MSG91_ROUTE', 4),

@@ -59,23 +59,48 @@ class Wrapper
     }
 
 
-    public static function sendOTP($param)
+	/**
+	 *  Send OTP
+	 *
+	 * @param $param
+	 * @return array
+	 */
+	public static function sendOTP($param): array
     {
         return (new self)->setup('sendotp', $param);
     }
 
-    public static function resendOTP($param)
+	/**
+	 * Resend OTP
+	 *
+	 * @param $param
+	 * @return array
+	 */
+	public static function resendOTP($param): array
     {
         $param['otp_expiry'] = $param['otp_expiry'] ?? config('msg91.otp_expiry');
         return (new self)->setup('resendotp', $param);
     }
 
-    public static function verifyOTP($param)
+	/**
+	 * Verify OTP
+	 *
+	 * @param $param
+	 * @return array
+	 */
+	public static function verifyOTP($param): array
     {
         $param['otp_expiry'] = $param['otp_expiry'] ?? config('msg91.otp_expiry');
         return (new self)->setup('verify', $param);
     }
-    public static function sms($param)
+
+	/**
+	 * Send SMS
+	 *
+	 * @param $param
+	 * @return array
+	 */
+	public static function sms($param): array
     {
         $url = 'https://api.msg91.com/api/';
         $param['url'] = $param['url'] ?? $url;
@@ -83,7 +108,14 @@ class Wrapper
     }
 
 
-    private function setup($action, $params)
+	/**
+	 * Send's Request To MSG91 API
+	 *
+	 * @param $action
+	 * @param $params
+	 * @return array
+	 */
+	private function setup($action, $params): array
     {
         $params = $this->overrideDefaults( $params );
 
@@ -94,12 +126,12 @@ class Wrapper
         return Http::post($url, $params)->json();
     }
 
-    /**
-     *  Override default api params
-     *
-     * @param array $params
-     * @return void
-     */
+	/**
+	 *  Override default API params
+	 *
+	 * @param array $params
+	 * @return array
+	 */
     private function overrideDefaults(array $params): array
     {
         if ( array_key_exists('baseUrl', $params) ) {
@@ -108,7 +140,7 @@ class Wrapper
         }
 
         foreach ( $params as $key =>  $param ) {
-            if ( in_array($key, $this->defaults )) {
+            if ( in_array($key, $this->defaults, true) ) {
                 $this->{$key} = $param;
                 unset($params[$key]);
             }

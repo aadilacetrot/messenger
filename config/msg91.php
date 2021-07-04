@@ -23,13 +23,13 @@ return [
     'otp_expiry' => 5,
 
     // 'map' => [
-    //     \App\Lib\SMSCode::EXPIRY_REMINDER => 'sms.expiry_reminder',
-    //     \App\Lib\SMSCode::EXPIRED => 'sms.expired',
-    //     \App\Lib\SMSCode::AUTO_RENEW_REMINDER => 'sms.auto_renew_reminder',
-    //     \App\Lib\SMSCode::RENEWED => 'sms.renewed',
-    //     \App\Lib\SMSCode::ACTIVATED => 'sms.activated',
-    //     \App\Lib\SMSCode::FAILED => 'sms.failed',
-    //     \App\Lib\SMSCode::SEND_OTP => 'sms.send_otp',
+    //     \App\Lib\Template::EXPIRY_REMINDER => 'sms.expiry_reminder',
+    //     \App\Lib\Template::EXPIRED => 'sms.expired',
+    //     \App\Lib\Template::AUTO_RENEW_REMINDER => 'sms.auto_renew_reminder',
+    //     \App\Lib\Template::RENEWED => 'sms.renewed',
+    //     \App\Lib\Template::ACTIVATED => 'sms.activated',
+    //     \App\Lib\Template::FAILED => 'sms.failed',
+    //     \App\Lib\Template::SEND_OTP => 'sms.send_otp',
     // ],
 
     'status_code' => [

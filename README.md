@@ -13,10 +13,10 @@ Add following lines of code in composer.json
         {
             "type": "package",
             "package": {
-                "name": "aadil96/messenger",
+                "name": "acetrot/messenger",
                 "version": "dev-main",
                 "source": {
-                    "url": "https://github.com/aadil96/messenger.git",
+                    "url": "https://github.com/aadilacetrot/messenger.git",
                     "type": "git",
                     "reference": "main"
                 },
@@ -37,7 +37,7 @@ Require package
 
 "require": {
       ...
-        "aadil96/messenger": "dev-main"
+        "acetrot/messenger": "dev-main"
     },
 </code>
 </pre>
